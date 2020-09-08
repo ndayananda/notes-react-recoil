@@ -1,0 +1,1 @@
+This is a React Notes app created using React Hooks & Recoil for state management
