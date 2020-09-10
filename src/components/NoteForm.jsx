@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { getNotesById } from './../state/selectors';
-import { notesAtom } from './../state/atoms';
+import { notesAtom, noteAtom } from './../state/atoms';
 
 function NoteForm(props) {
-  const selectedNote = useRecoilValue(getNotesById(props.id)) || {id: Date.now()};
+  const selectedNote = useRecoilValue(noteAtom(props.id)) || {id: Date.now()};
   const [note, setNote] = useState(selectedNote);
   const [notes, setNotes] = useRecoilState(notesAtom);
 
@@ -39,6 +39,13 @@ function NoteForm(props) {
         </div>
       </div>
 
+      <div className="field">
+        <label className="switch level-item" aria-label="Favorite">
+          <input name="isFavorite" type="checkbox" {...(note.isFavorite && {checked: true})} />
+          <span className="slider round"></span>
+        </label>
+      </div>
+      
       <div className="field is-grouped">
         <div className="control">
           <button className="button is-link">Submit</button>
